@@ -5,18 +5,17 @@ import store from './store/index';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto';
+import './i18n';
 import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { routes } from './routes';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        {renderRoutes(routes)}
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Provider store={store}>
+      {renderRoutes(routes)}
+    </Provider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
