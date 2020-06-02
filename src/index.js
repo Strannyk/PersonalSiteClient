@@ -1,20 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import store from './app/store';
+import store from './store/index';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto';
-import { BrowserRouter } from "react-router-dom";
-import { renderRoutes } from "react-router-config";
+import { BrowserRouter } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 import { routes } from './routes';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      {renderRoutes(routes)}
-    </Provider>
-  </BrowserRouter>,
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        {renderRoutes(routes)}
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
