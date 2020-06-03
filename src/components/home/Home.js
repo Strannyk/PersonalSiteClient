@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -53,7 +54,9 @@ function Home() {
         <Box letterSpacing={10} m={1} fontSize={18} className="name">{t('name')}</Box>
         <Box letterSpacing={10} m={1}>{t('position')}</Box>
         <div className="contact-link-wrapper">
-          <NavLink to="/contact">{t('contact')}</NavLink>
+          <NavLink to="/contact">
+            <Button variant="outlined" color="secondary">{t('contact')}</Button>
+          </NavLink>
         </div>
       </Typography>
 

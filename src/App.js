@@ -23,7 +23,8 @@ function App({ route }) {
         palette: {
           type: 'dark',
           background: { default: '#18191a' },
-          primary: { main: '#593d88' }
+          primary: { main: '#593d88' },
+          secondary: { main: '#a6d4fa' }
         },
         props: {
           MuiMenu: {
