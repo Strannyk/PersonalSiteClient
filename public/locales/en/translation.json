@@ -1,6 +1,10 @@
 {
   "pages": {
     "Home": "Home",
-    "Contact": "Contact with me"
-  }
+    "Contact": "Contacts"
+  },
+  "name": "Mikhail Pikulik",
+  "position": "Software engineer",
+  "contact": "Contact with me",
+  "skills": "Skills"
 }

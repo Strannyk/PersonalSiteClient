@@ -1,0 +1,22 @@
+.home-page {
+  display: flex;
+
+  .home-col {
+    flex: 50%;
+    margin-top: 100px;
+  }
+
+  .name {
+    margin-bottom: 20px;
+  }
+
+  .contact-link-wrapper {
+    margin: 50px 8px 0;
+    font-size: 14px;
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+}
