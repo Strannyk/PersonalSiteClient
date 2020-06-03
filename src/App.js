@@ -12,9 +12,11 @@ import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { useTranslation } from 'react-i18next';
+import Loader from './components/loader/Loader';
 import './App.scss';
 
 function App({ route }) {
+
   const theme = React.useMemo(
     () =>
       createMuiTheme({
@@ -73,10 +75,13 @@ function App({ route }) {
         ? <section>
           <AppBar position="static">
             <Toolbar className="app-toolbar">
-              <Typography style={{ flexGrow: 3 }}>{t(currentPageTitle)}</Typography>
+              <Typography className="toolbar-title">{t(currentPageTitle)}</Typography>
 
-              <Button aria-controls="simple-menu" aria-haspopup="true" onClick={toggleMenu}>
-                {i18n.language}
+              <Button aria-controls="simple-menu"
+                      aria-haspopup="true"
+                      className="lang-button"
+                      onClick={toggleMenu}>
+                {i18n.language === 'en' ? 'Language' : 'Язык'}
               </Button>
               <Menu
                 id="simple-menu"
@@ -84,15 +89,17 @@ function App({ route }) {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={closeMenu}>
-                <MenuItem onClick={() => changeLanguage('en')}>EN</MenuItem>
-                <MenuItem onClick={() => changeLanguage('ru')}>RU</MenuItem>
+                <MenuItem className="lang-menu-item" onClick={() => changeLanguage('en')}>English</MenuItem>
+                <MenuItem className="lang-menu-item" onClick={() => changeLanguage('ru')}>Русский</MenuItem>
               </Menu>
             </Toolbar>
           </AppBar>
 
-          {renderRoutes(route.routes)}
+          <section className="main-content">
+            {renderRoutes(route.routes)}
+          </section>
         </section>
-        : <section>Loading...</section>
+        : <Loader />
       }
     </ThemeProvider>
   );
