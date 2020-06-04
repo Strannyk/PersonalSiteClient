@@ -17,6 +17,16 @@ i18n
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     }
-  });
+  }, () => setDefaultLanguage());
+
+function setDefaultLanguage() {
+  const defaultLang = 'en';
+  const marker = 'i18nFirstLoad';
+
+  if (!localStorage.getItem(marker)) {
+    i18n.changeLanguage(defaultLang).then();
+    localStorage.setItem(marker, 'false');
+  }
+}
 
 export default i18n;
