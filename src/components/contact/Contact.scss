@@ -8,3 +8,26 @@
     top: -4px;
   }
 }
+
+.feedback-form {
+  margin-top: 50px;
+
+  .form-element-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 25px;
+
+    .MuiFormHelperText-root.MuiFormHelperText-contained {
+      position: absolute;
+      bottom: -25px;
+    }
+  }
+
+  .checkbox-wrapper {
+    width: 300px;
+
+    .MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1 {
+      font-weight: 300;
+    }
+  }
+}

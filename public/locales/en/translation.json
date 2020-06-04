@@ -3,9 +3,23 @@
     "Home": "Home",
     "Contact": "Contacts"
   },
+
   "name": "Mikhail Pikulik",
   "position": "Software engineer",
   "contact": "Contact with me",
   "skills": "Skills",
-  "toHome": "Home"
+  "toHome": "Home",
+
+  "feedbackForm": {
+    "name": "Your name",
+    "company": "Company",
+    "message": "Message",
+    "requestCV": "Request CV",
+    "send": "Send",
+
+    "errors": {
+      "noName": "At least tell me your name",
+      "noMessage": "Have you nothing to say?"
+    }
+  }
 }

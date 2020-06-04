@@ -15,21 +15,21 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import { useTranslation } from 'react-i18next';
 import './Home.scss';
 
-function Home() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper
+  },
+  nested: {
+    paddingLeft: theme.spacing(4)
+  },
+  subNested: {
+    paddingLeft: theme.spacing(8)
+  }
+}));
 
-  const classes = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-      maxWidth: 360,
-      backgroundColor: theme.palette.background.paper,
-    },
-    nested: {
-      paddingLeft: theme.spacing(4),
-    },
-    subNested: {
-      paddingLeft: theme.spacing(8),
-    }
-  }))();
+function Home() {
 
   const [openJava, setOpenJava] = React.useState(false);
   const [openSpring, setOpenSpring] = React.useState(false);
@@ -58,6 +58,7 @@ function Home() {
   const handleDesktop = () => setOpenDesktop(!openDesktop);
   const handleDB = () => setOpenDB(!openDB);
 
+  const classes = useStyles();
   const { t } = useTranslation();
 
   return (
