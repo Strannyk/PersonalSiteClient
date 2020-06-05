@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import './Contact.scss';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
@@ -19,6 +19,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Contact() {
+
+  const data = {
+    name: null,
+    company: null,
+    message: null,
+    requestCV: false
+  };
 
   const classes = useStyles();
   const { t } = useTranslation();
@@ -33,6 +40,7 @@ function Contact() {
       <form className={[classes.root, 'feedback-form'].join(' ')} noValidate autoComplete="off">
         <div className="form-element-wrapper">
           <TextField label={t('feedbackForm.name')}
+                     value={data.name}
                      error={false}
                      helperText={false ? t('feedbackForm.errors.noName') : null}
                      color="secondary"
@@ -41,12 +49,14 @@ function Contact() {
 
         <div className="form-element-wrapper">
           <TextField label={t('feedbackForm.company')}
+                     value={data.company}
                      color="secondary"
                      variant="outlined" />
         </div>
 
         <div className="form-element-wrapper">
           <TextField label={t('feedbackForm.message')}
+                     value={data.message}
                      error={false}
                      helperText={false ? t('feedbackForm.errors.noMessage') : null}
                      color="secondary"
