@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import TextField from '@material-ui/core/TextField';
@@ -20,12 +20,10 @@ const useStyles = makeStyles(theme => ({
 
 function Contact() {
 
-  const data = {
-    name: null,
-    company: null,
-    message: null,
-    requestCV: false
-  };
+  const [name, setName] = useState('');
+  const [company, setCompany] = useState('');
+  const [message, setMessage] = useState('');
+  const [requestCV, setRequestCV] = useState(false);
 
   const classes = useStyles();
   const { t } = useTranslation();
@@ -40,7 +38,8 @@ function Contact() {
       <form className={[classes.root, 'feedback-form'].join(' ')} noValidate autoComplete="off">
         <div className="form-element-wrapper">
           <TextField label={t('feedbackForm.name')}
-                     value={data.name}
+                     defaultValue={name}
+                     onBlur={e => setName(e.target.value)}
                      error={false}
                      helperText={false ? t('feedbackForm.errors.noName') : null}
                      color="secondary"
@@ -49,14 +48,16 @@ function Contact() {
 
         <div className="form-element-wrapper">
           <TextField label={t('feedbackForm.company')}
-                     value={data.company}
+                     defaultValue={company}
+                     onBlur={e => setCompany(e.target.value)}
                      color="secondary"
                      variant="outlined" />
         </div>
 
         <div className="form-element-wrapper">
           <TextField label={t('feedbackForm.message')}
-                     value={data.message}
+                     defaultValue={message}
+                     onBlur={e => setMessage(e.target.value)}
                      error={false}
                      helperText={false ? t('feedbackForm.errors.noMessage') : null}
                      color="secondary"
@@ -68,7 +69,7 @@ function Contact() {
           <div className="checkbox-wrapper">
             <FormControlLabel
               control={
-                <Checkbox />
+                <Checkbox checked={requestCV} onChange={() => setRequestCV(!requestCV)} />
               }
               label={t('feedbackForm.requestCV')} />
           </div>

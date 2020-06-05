@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -31,14 +31,14 @@ const useStyles = makeStyles(theme => ({
 
 function Home() {
 
-  const [openJava, setOpenJava] = React.useState(false);
-  const [openSpring, setOpenSpring] = React.useState(false);
-  const [openJS, setOpenJS] = React.useState(false);
-  const [openBackend, setOpenBackend] = React.useState(false);
-  const [openFrontend, setOpenFrontend] = React.useState(false);
-  const [openMobile, setOpenMobile] = React.useState(false);
-  const [openDesktop, setOpenDesktop] = React.useState(false);
-  const [openDB, setOpenDB] = React.useState(false);
+  const [openJava, setOpenJava] = useState(false);
+  const [openSpring, setOpenSpring] = useState(false);
+  const [openJS, setOpenJS] = useState(false);
+  const [openBackend, setOpenBackend] = useState(false);
+  const [openFrontend, setOpenFrontend] = useState(false);
+  const [openMobile, setOpenMobile] = useState(false);
+  const [openDesktop, setOpenDesktop] = useState(false);
+  const [openDB, setOpenDB] = useState(false);
 
   const handleJava = () => {
     setOpenJava(!openJava);

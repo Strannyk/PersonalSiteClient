@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,7 +17,7 @@ import './App.scss';
 
 function App({ route }) {
 
-  const theme = React.useMemo(
+  const theme = useMemo(
     () =>
       createMuiTheme({
         palette: {
@@ -49,7 +49,7 @@ function App({ route }) {
   const currentPageTitle = 'pages.' + currentPage;
   const ready = i18n.isInitialized;
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const toggleMenu = event => {
     setAnchorEl(event.currentTarget);
