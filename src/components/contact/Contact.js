@@ -25,6 +25,32 @@ function Contact() {
   const [message, setMessage] = useState('');
   const [requestCV, setRequestCV] = useState(false);
 
+  const [nameIsValid, setNameIsValid] = useState(true);
+  const [messageIsValid, setMessageIsValid] = useState(true);
+
+  const handleSubmit = () => {
+    if (dataIsValid()) {
+      clearData();
+    }
+  };
+
+  const dataIsValid = () => {
+    const formNameIsValid = !!name.trim();
+    const formMessageIsValid = !!message.trim();
+
+    setNameIsValid(formNameIsValid);
+    setMessageIsValid(formMessageIsValid);
+
+    return formNameIsValid && formMessageIsValid;
+  };
+
+  const clearData = () => {
+    setName('');
+    setCompany('');
+    setMessage('');
+    setRequestCV(false);
+  };
+
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -38,28 +64,30 @@ function Contact() {
       <form className={[classes.root, 'feedback-form'].join(' ')} noValidate autoComplete="off">
         <div className="form-element-wrapper">
           <TextField label={t('feedbackForm.name')}
-                     defaultValue={name}
-                     onBlur={e => setName(e.target.value)}
-                     error={false}
-                     helperText={false ? t('feedbackForm.errors.noName') : null}
+                     value={name}
+                     onChange={e => setName(e.target.value)}
+                     onFocus={() => setNameIsValid(true)}
+                     error={!nameIsValid}
+                     helperText={nameIsValid ? null : t('feedbackForm.errors.noName')}
                      color="secondary"
                      variant="outlined" />
         </div>
 
         <div className="form-element-wrapper">
           <TextField label={t('feedbackForm.company')}
-                     defaultValue={company}
-                     onBlur={e => setCompany(e.target.value)}
+                     value={company}
+                     onChange={e => setCompany(e.target.value)}
                      color="secondary"
                      variant="outlined" />
         </div>
 
         <div className="form-element-wrapper">
           <TextField label={t('feedbackForm.message')}
-                     defaultValue={message}
-                     onBlur={e => setMessage(e.target.value)}
-                     error={false}
-                     helperText={false ? t('feedbackForm.errors.noMessage') : null}
+                     value={message}
+                     onChange={e => setMessage(e.target.value)}
+                     onFocus={() => setMessageIsValid(true)}
+                     error={!messageIsValid}
+                     helperText={messageIsValid ? null : t('feedbackForm.errors.noMessage')}
                      color="secondary"
                      multiline rows={4}
                      variant="outlined" />
@@ -76,7 +104,11 @@ function Contact() {
         </div>
 
         <div className="form-element-wrapper">
-          <Button variant="outlined" color="secondary">{t('feedbackForm.send')}</Button>
+          <Button variant="outlined"
+                  color="secondary"
+                  onClick={() => handleSubmit()}>
+            {t('feedbackForm.send')}
+          </Button>
         </div>
       </form>
     </div>
