@@ -31,3 +31,21 @@ a {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+
+.not-found-page {
+  display: table-cell;
+  vertical-align: middle;
+  height: calc(100vh - 112px);
+
+  & > .not-found-code, a {
+    display: flex;
+    justify-content: center;
+    width: calc(100vw - 30px);
+  }
+
+  .not-found-code {
+    margin-bottom: 30px;
+    color: #a6d4fa;
+    font-size: 42px;
+  }
+}

@@ -9,6 +9,8 @@ const pages = [
   }
 ];
 
+const notFoundPage = 'notFound';
+
 export default {
   getPathFromName(name) {
     const page = pages.filter(page => page.name === name)[0];
@@ -17,6 +19,6 @@ export default {
 
   getNameFromPath(path) {
     const page = pages.filter(page => page.path === path)[0];
-    return page ? page.name : null;
+    return page ? page.name : notFoundPage;
   }
 };

@@ -1,7 +1,8 @@
 {
   "pages": {
     "Home": "Home",
-    "Contact": "Contacts"
+    "Contact": "Contacts",
+    "notFound": "404"
   },
 
   "name": "Mikhail Pikulik",
