@@ -20,10 +20,11 @@ i18n
   }, () => setDefaultLanguage());
 
 function setDefaultLanguage() {
-  const defaultLang = 'en';
   const marker = 'i18nFirstLoad';
 
   if (!localStorage.getItem(marker)) {
+    const defaultLang = 'en';
+
     i18n.changeLanguage(defaultLang).then();
     localStorage.setItem(marker, 'false');
   }

@@ -3,10 +3,14 @@ import { NavLink } from 'react-router-dom';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
+import http from '../../services/httpService';
+import Loader from '../loader/Loader';
 import './Contact.scss';
 
 const useStyles = makeStyles(theme => ({
@@ -18,6 +22,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function Alert(props) {
+
+  return <MuiAlert elevation={3} variant="filled" {...props} />;
+}
+
 function Contact() {
 
   const [name, setName] = useState('');
@@ -28,10 +37,38 @@ function Contact() {
   const [nameIsValid, setNameIsValid] = useState(true);
   const [messageIsValid, setMessageIsValid] = useState(true);
 
+  const [loader, setLoader] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
+
   const handleSubmit = () => {
     if (dataIsValid()) {
-      clearData();
+      setLoader(true);
+      http.sendMessage()
+        .then(res => {
+          console.log(res);
+          handleSubmitSuccess();
+          clearData();
+        })
+        .catch(err => {
+          handleSubmitError();
+          console.log(err);
+        })
+        .finally(() => setLoader(false))
     }
+  };
+
+  const handleSubmitSuccess = () => {
+    setAlertSeverity('success');
+    setAlertMessage('message.success');
+    setSnackbarOpen(true);
+  };
+
+  const handleSubmitError = () => {
+    setAlertSeverity('error');
+    setAlertMessage('message.error');
+    setSnackbarOpen(true);
   };
 
   const dataIsValid = () => {
@@ -111,6 +148,17 @@ function Contact() {
           </Button>
         </div>
       </form>
+
+      <Snackbar className="snackbar"
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={() => setSnackbarOpen(false)}>
+        <Alert severity={alertSeverity}>{t(alertMessage)}</Alert>
+      </Snackbar>
+
+      {loader &&
+      <Loader />
+      }
     </div>
   );
 }

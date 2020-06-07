@@ -21,5 +21,10 @@
       "noName": "At least tell me your name",
       "noMessage": "Have you nothing to say?"
     }
+  },
+
+  "message": {
+    "success": "Thank you, message sent",
+    "error": "Sorry, an error has occurred"
   }
 }

@@ -24,7 +24,9 @@ function App({ route }) {
           type: 'dark',
           background: { default: '#18191a' },
           primary: { main: '#593d88' },
-          secondary: { main: '#a6d4fa' }
+          secondary: { main: '#a6d4fa' },
+          success: { main: '#A6E22E' },
+          error: { main: '#FF7597' }
         },
         props: {
           MuiMenu: {
@@ -37,6 +39,13 @@ function App({ route }) {
               horizontal: 'left'
             },
             getContentAnchorEl: null
+          },
+
+          MuiSnackbar: {
+            anchorOrigin: {
+              vertical: 'top',
+              horizontal: 'center'
+            }
           }
         }
       }), []
