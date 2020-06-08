@@ -20,7 +20,8 @@
 
     "errors": {
       "noName": "At least tell me your name",
-      "noMessage": "Have you nothing to say?"
+      "noMessage": "Have you nothing to say?",
+      "tooLong": "Too long"
     }
   },
 

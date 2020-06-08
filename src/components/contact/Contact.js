@@ -36,6 +36,11 @@ function Contact() {
 
   const [nameIsValid, setNameIsValid] = useState(true);
   const [messageIsValid, setMessageIsValid] = useState(true);
+  const [companyIsValid, setCompanyIsValid] = useState(true);
+
+
+  const [nameErrorText, setNameErrorText] = useState(null);
+  const [messageErrorText, setMessageErrorText] = useState(null);
 
   const [loader, setLoader] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -43,13 +48,24 @@ function Contact() {
   const [alertMessage, setAlertMessage] = useState('');
 
   const handleSubmit = () => {
-    if (dataIsValid()) {
+    if (dataIsValidate()) {
       setLoader(true);
-      http.sendMessage()
+      const data = {
+        name: name,
+        company: company,
+        message: message,
+        requestCV: requestCV
+      };
+
+      http.sendMessage(data)
         .then(res => {
-          console.log(res);
-          handleSubmitSuccess();
-          clearData();
+          if (String(res.status).startsWith('2')) {
+            handleSubmitSuccess();
+            clearData();
+          }
+          else {
+            handleSubmitError();
+          }
         })
         .catch(err => {
           handleSubmitError();
@@ -71,14 +87,35 @@ function Contact() {
     setSnackbarOpen(true);
   };
 
-  const dataIsValid = () => {
-    const formNameIsValid = !!name.trim();
-    const formMessageIsValid = !!message.trim();
+  const dataIsValidate = () => {
+    const maxLength = 255;
+
+    const nameIsNotEmpty = !!name.trim();
+    const nameInNotLong = name.length <= maxLength;
+
+    const messageIsNotEmpty = !!message.trim();
+    const messageInNotLong = message.length <= maxLength;
+
+    const formCompanyIsValid = company.length <= maxLength;
+
+    const formNameIsValid = nameIsNotEmpty && nameInNotLong;
+    const formMessageIsValid = messageIsNotEmpty && messageInNotLong;
+
+    if (!formNameIsValid) {
+      const errorMessage = nameIsNotEmpty ? t('feedbackForm.errors.tooLong') : t('feedbackForm.errors.noName');
+      setNameErrorText(errorMessage);
+    }
+
+    if (!formMessageIsValid) {
+      const errorMessage = messageIsNotEmpty ? t('feedbackForm.errors.tooLong') : t('feedbackForm.errors.noMessage');
+      setMessageErrorText(errorMessage);
+    }
 
     setNameIsValid(formNameIsValid);
     setMessageIsValid(formMessageIsValid);
+    setCompanyIsValid(formCompanyIsValid);
 
-    return formNameIsValid && formMessageIsValid;
+    return formNameIsValid && formMessageIsValid && formCompanyIsValid;
   };
 
   const clearData = () => {
@@ -104,13 +141,16 @@ function Contact() {
                    onChange={e => setName(e.target.value)}
                    onFocus={() => setNameIsValid(true)}
                    error={!nameIsValid}
-                   helperText={nameIsValid ? null : t('feedbackForm.errors.noName')}
+                   helperText={nameIsValid ? null : nameErrorText}
                    color="secondary"
                    variant="outlined" />
 
         <TextField label={t('feedbackForm.company')}
                    value={company}
                    onChange={e => setCompany(e.target.value)}
+                   onFocus={() => setCompanyIsValid(true)}
+                   error={!companyIsValid}
+                   helperText={companyIsValid ? null : t('feedbackForm.errors.tooLong')}
                    color="secondary"
                    variant="outlined" />
 
@@ -119,7 +159,7 @@ function Contact() {
                    onChange={e => setMessage(e.target.value)}
                    onFocus={() => setMessageIsValid(true)}
                    error={!messageIsValid}
-                   helperText={messageIsValid ? null : t('feedbackForm.errors.noMessage')}
+                   helperText={messageIsValid ? null : messageErrorText}
                    color="secondary"
                    multiline rows={4}
                    variant="outlined" />
