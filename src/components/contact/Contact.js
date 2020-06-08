@@ -99,54 +99,44 @@ function Contact() {
       </NavLink>
 
       <form className={[classes.root, 'feedback-form'].join(' ')} noValidate autoComplete="off">
-        <div className="form-element-wrapper">
-          <TextField label={t('feedbackForm.name')}
-                     value={name}
-                     onChange={e => setName(e.target.value)}
-                     onFocus={() => setNameIsValid(true)}
-                     error={!nameIsValid}
-                     helperText={nameIsValid ? null : t('feedbackForm.errors.noName')}
-                     color="secondary"
-                     variant="outlined" />
+        <TextField label={t('feedbackForm.name')}
+                   value={name}
+                   onChange={e => setName(e.target.value)}
+                   onFocus={() => setNameIsValid(true)}
+                   error={!nameIsValid}
+                   helperText={nameIsValid ? null : t('feedbackForm.errors.noName')}
+                   color="secondary"
+                   variant="outlined" />
+
+        <TextField label={t('feedbackForm.company')}
+                   value={company}
+                   onChange={e => setCompany(e.target.value)}
+                   color="secondary"
+                   variant="outlined" />
+
+        <TextField label={t('feedbackForm.message')}
+                   value={message}
+                   onChange={e => setMessage(e.target.value)}
+                   onFocus={() => setMessageIsValid(true)}
+                   error={!messageIsValid}
+                   helperText={messageIsValid ? null : t('feedbackForm.errors.noMessage')}
+                   color="secondary"
+                   multiline rows={4}
+                   variant="outlined" />
+
+        <div className="checkbox-wrapper">
+          <FormControlLabel
+            control={
+              <Checkbox checked={requestCV} onChange={() => setRequestCV(!requestCV)} />
+            }
+            label={t('feedbackForm.requestCV')} />
         </div>
 
-        <div className="form-element-wrapper">
-          <TextField label={t('feedbackForm.company')}
-                     value={company}
-                     onChange={e => setCompany(e.target.value)}
-                     color="secondary"
-                     variant="outlined" />
-        </div>
-
-        <div className="form-element-wrapper">
-          <TextField label={t('feedbackForm.message')}
-                     value={message}
-                     onChange={e => setMessage(e.target.value)}
-                     onFocus={() => setMessageIsValid(true)}
-                     error={!messageIsValid}
-                     helperText={messageIsValid ? null : t('feedbackForm.errors.noMessage')}
-                     color="secondary"
-                     multiline rows={4}
-                     variant="outlined" />
-        </div>
-
-        <div className="form-element-wrapper">
-          <div className="checkbox-wrapper">
-            <FormControlLabel
-              control={
-                <Checkbox checked={requestCV} onChange={() => setRequestCV(!requestCV)} />
-              }
-              label={t('feedbackForm.requestCV')} />
-          </div>
-        </div>
-
-        <div className="form-element-wrapper">
-          <Button variant="outlined"
-                  color="secondary"
-                  onClick={() => handleSubmit()}>
-            {t('feedbackForm.send')}
-          </Button>
-        </div>
+        <Button variant="outlined"
+                color="secondary"
+                onClick={() => handleSubmit()}>
+          {t('feedbackForm.send')}
+        </Button>
       </form>
 
       <Snackbar className="snackbar"
