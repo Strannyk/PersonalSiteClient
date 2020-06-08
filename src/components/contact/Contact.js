@@ -102,12 +102,12 @@ function Contact() {
     const formMessageIsValid = messageIsNotEmpty && messageInNotLong;
 
     if (!formNameIsValid) {
-      const errorMessage = nameIsNotEmpty ? t('feedbackForm.errors.tooLong') : t('feedbackForm.errors.noName');
+      const errorMessage = nameIsNotEmpty ? 'feedbackForm.errors.tooLong' : 'feedbackForm.errors.noName';
       setNameErrorText(errorMessage);
     }
 
     if (!formMessageIsValid) {
-      const errorMessage = messageIsNotEmpty ? t('feedbackForm.errors.tooLong') : t('feedbackForm.errors.noMessage');
+      const errorMessage = messageIsNotEmpty ? 'feedbackForm.errors.tooLong' : 'feedbackForm.errors.noMessage';
       setMessageErrorText(errorMessage);
     }
 
@@ -141,7 +141,7 @@ function Contact() {
                    onChange={e => setName(e.target.value)}
                    onFocus={() => setNameIsValid(true)}
                    error={!nameIsValid}
-                   helperText={nameIsValid ? null : nameErrorText}
+                   helperText={nameIsValid ? null : t(nameErrorText)}
                    color="secondary"
                    variant="outlined" />
 
@@ -159,7 +159,7 @@ function Contact() {
                    onChange={e => setMessage(e.target.value)}
                    onFocus={() => setMessageIsValid(true)}
                    error={!messageIsValid}
-                   helperText={messageIsValid ? null : messageErrorText}
+                   helperText={messageIsValid ? null : t(messageErrorText)}
                    color="secondary"
                    multiline rows={4}
                    variant="outlined" />
